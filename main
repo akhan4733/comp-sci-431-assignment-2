@@ -1,0 +1,56 @@
+#include <iostream>
+#include <thread>
+using namespace std;
+ 
+// a funny dummy fuction 
+void foo(int a)
+{
+  for (int i = 0; i < a; i++)
+  {
+    cout << "my name is aamna and i love coffee\n";
+  }
+}
+ 
+// this is the callable object
+class thread_obj {
+public:
+    void operator()(int x)
+    {
+      for (int i = 0; i < x; i++)
+        cout << " i dont know what to put lol\n";
+    }
+};
+ 
+// main code
+int main()
+{
+  cout << "heyyyyyyyyyyyyyyyyyyyyyy" << endl;
+   
+  // the thread i said has been launched 
+  thread th1(foo, 4);
+ 
+  // the thread i said has been launched 
+  thread th2(thread_obj(), 5);
+   
+  // using an array function 
+  auto f = [](int x)
+  {
+    for (int i = 0; i < x; i++)
+      cout << "i love music\n";
+  };
+   
+  //shows the function twice 
+  thread th3(f, 2);
+   
+  // wait for the threads to finish
+  // wait for thread 1 to finish
+  th1.join();
+   
+  // waiting for thread t2 to finish
+  th2.join();
+   
+  // waiting for thread t3 to finish
+  th3.join();
+   
+  return 0;
+}
